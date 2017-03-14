@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Omni.Core.Service
 {
-    public interface IDataService<TItem>
+    public interface IDataService<TItem>: IDisposable where TItem : class
     {
         IEnumerable<TItem> Read(IEnumerable<KeyValuePair<string, string>> items);
 
@@ -12,6 +12,8 @@ namespace Omni.Core.Service
 
         TItem Create(TItem newItem);
 
-        bool Delete(TItem newItem);
+        void Delete(TItem newItem);
+
+        int SaveChanges();
     }
 }
