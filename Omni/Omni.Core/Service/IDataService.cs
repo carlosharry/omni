@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Omni.Core.Service
 {
-    public interface IDataService<TItem>: IDisposable where TItem : class
+    public interface IDataService: IDisposable
     {
-        IDataServiceRepository<T1> Repository<T1>() where T1 : class;
+        IDataServiceRepository<TItem> Repository<TItem>() where TItem : class;
 
         int SaveChanges();
     }

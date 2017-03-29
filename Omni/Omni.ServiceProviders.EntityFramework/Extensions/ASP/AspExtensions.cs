@@ -2,6 +2,8 @@
 using Omni.Core.Infrastructure.Interfaces;
 using Omni.Core.Service;
 using Omni.ServiceProviders.EntityFramework.Factory;
+using Omni.ServiceProviders.EntityFramework.Infrastructure;
+using Omni.ServiceProviders.EntityFramework.Model;
 using Omni.ServiceProviders.EntityFramework.Service;
 using System;
 using System.Collections.Generic;
@@ -14,16 +16,20 @@ namespace Omni.ServiceProviders.EntityFramework.Extensions.ASP
 {
     public static class AspExtensions
     {
-        public static IServiceCollection UseEntityFrameworkWithOmni(this IServiceCollection services, Func<DbContext> context)
+        public static OmniEFBuilder UseEntityFrameworkWithOmni(this IServiceCollection services, Func<DbContext> context)
         {
             if (services == null) throw new ArgumentNullException("IServiceCollection cannot be null");
             if (context == null) throw new ArgumentNullException("The Func<DbContext> cannot be null");
 
-            ContextFactory.SetupInstance(context);
+            OmniEFManager.SetupInstance(context, new OmniEFConfiguration {
+                MapContextToController = false
+            });
 
-            services.AddTransient<IDataServiceFactory, EntityDataServiceFactory>();
+            services.AddTransient<IDataServiceProvider, EntityDataServiceProvider>();
 
-            return services;
+            var builder = new OmniEFBuilder();
+
+            return builder;
         }
     }
 }

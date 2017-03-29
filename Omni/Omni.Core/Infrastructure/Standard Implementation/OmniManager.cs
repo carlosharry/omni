@@ -1,4 +1,5 @@
 ﻿using Omni.Core.Infrastructure.Interfaces;
+using Omni.Core.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,10 +13,13 @@ namespace Omni.Core.Infrastructure.Standard_Implementation
 
 
         private IServiceProvider provider;
+        private IDataServiceProvider serviceProvider;
 
         internal OmniManager(IServiceProvider provider)
         {
             this.provider = provider ?? throw new ArgumentNullException("The provider cannot be null");
+            this.serviceProvider = (this.provider.GetService(typeof(IDataServiceProvider)) as IDataServiceProvider) ?? throw new ArgumentNullException("The service provider cannot be null.");
+            this.serviceProvider.Setup(this);
         }
 
         public static OmniManager GetInstance()

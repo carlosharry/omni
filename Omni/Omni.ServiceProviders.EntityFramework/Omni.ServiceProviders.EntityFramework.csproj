@@ -100,11 +100,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ASP\AspExtensions.cs" />
-    <Compile Include="Factory\ContextFactory.cs" />
+    <Compile Include="Factory\OmniEFManager.cs" />
+    <Compile Include="Infrastructure\DbContextHelper.cs" />
     <Compile Include="Model\DynamicSearchModel.cs" />
+    <Compile Include="Infrastructure\OmniEFBuilder.cs" />
+    <Compile Include="Model\OmniConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\EntityDataService.cs" />
-    <Compile Include="Service\EntityDataServiceFactory.cs" />
+    <Compile Include="Service\EntityDataServiceProvider.cs" />
     <Compile Include="Service\EntityDataServiceRepository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Omni.ServiceProviders.EntityFramework.Service
 {
-    public class EntityDataService<T> : IDataService<T> where T : class
+    public class EntityDataService : IDataService
     {
         public DbContext Context { get; private set; }
 
@@ -20,9 +20,9 @@ namespace Omni.ServiceProviders.EntityFramework.Service
             this.Context = context ?? throw new ArgumentNullException("The DbContext cannot be null");
         }
 
-        public IDataServiceRepository<T1> Repository<T1>() where T1 : class
+        public IDataServiceRepository<T> Repository<T>() where T : class
         {
-            return new EntityDataServiceRepository<T1>(this.Context);
+            return new EntityDataServiceRepository<T>(this.Context);
         }
 
 
